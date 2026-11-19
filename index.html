@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nue Studio — Manicure e Pedicure a Codroipo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#FAF5F0;--ink:#2B1A1A;--muted:#7A6A66;--line:#E8D9D0;--rose:#C08A7A;--dark:#2B1A1A}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{display:block;width:100%;height:auto;background:#E8D9D0}
+h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.1}
+button{font-family:inherit;cursor:pointer;color:inherit}
+*{transition-timing-function:cubic-bezier(.22,1,.36,1)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+@media(max-width:640px){.wrap{padding:0 16px}}
+.reveal{opacity:0;transform:translateY(36px);filter:blur(6px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1),filter .9s}
+.reveal.show{opacity:1;transform:none;filter:blur(0)}
+@keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes heroText{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .4s}
+header.scrolled{box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.nav{max-width:1120px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:padding .4s}
+header.scrolled .nav{padding-top:12px;padding-bottom:12px}
+.logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1}
+.logo span{display:block;font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:500}
+@media(max-width:820px){.nav-links{display:none}}
+.cart-btn{background:var(--ink);color:#fff;border:0;padding:11px 16px;border-radius:100px;font-weight:600;font-size:14px}
+.hero{position:relative;height:88vh;min-height:560px;overflow:hidden;margin-top:64px}
+@media(max-width:760px){.hero{height:82vh;min-height:520px}}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s cubic-bezier(.22,1,.36,1)}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;animation:heroZoom 6s cubic-bezier(.22,1,.36,1) both}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.25),rgba(0,0,0,.5))}
+.hero-content{position:absolute;inset:0;display:flex;align-items:center;z-index:2}
+.hero-content-inner{max-width:1120px;margin:0 auto;padding:0 20px;width:100%;color:#fff}
+.hero-content-inner h1{font-size:clamp(40px,6vw,66px);animation:heroText .9s cubic-bezier(.22,1,.36,1) both}
+.hero-content-inner h1 em{color:#F5D6C8;font-style:italic}
+.hero-content-inner p{margin-top:14px;max-width:50ch;opacity:.9;animation:heroText .9s .15s cubic-bezier(.22,1,.36,1) both}
+.hero-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;animation:heroText .9s .3s cubic-bezier(.22,1,.36,1) both}
+@media(max-width:640px){.hero-actions{flex-direction:column}.hero-actions button,.hero-actions a{width:100%;text-align:center}}
+.btn{padding:15px 26px;border-radius:100px;font-weight:700;border:0;font-size:15px;display:inline-block;text-align:center;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.btn:hover{transform:translateY(-3px) scale(1.02)}
+.btn-rose{background:var(--rose);color:#fff}.btn-white{background:#fff;color:#111}
+.hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero-dot{width:8px;height:8px;border-radius:100px;background:rgba(255,255,255,.5);border:0;transition:width .5s,background .5s;cursor:pointer}
+.hero-dot.active{width:28px;background:#fff}
+section{padding:52px 0}
+h2{font-size:34px}@media(max-width:640px){h2{font-size:28px}}
+.lead{color:var(--muted);margin-top:10px;max-width:62ch}
+.tabs{position:relative;display:inline-flex;background:#EFE9DC;padding:5px;border-radius:100px;margin-top:20px}
+.tabs button{position:relative;z-index:2;border:0;background:transparent;padding:11px 20px;border-radius:100px;font-weight:700;font-size:14px;transition:color .35s}
+.tabs button.active{color:#fff}
+.tabs-pill{position:absolute;top:5px;bottom:5px;border-radius:100px;background:var(--ink);transition:left .5s cubic-bezier(.22,1,.36,1),width .5s;z-index:1}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+@media(max-width:760px){.menu{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s}
+.card:hover{transform:translateY(-6px);box-shadow:0 22px 40px rgba(0,0,0,.12)}
+.card img{width:150px;min-width:150px;min-height:170px;object-fit:cover;transition:transform .8s}
+.card:hover img{transform:scale(1.08)}
+@media(max-width:480px){.card img{width:110px;min-width:110px}}
+.card-body{padding:16px;display:flex;flex-direction:column;flex:1;min-width:0}
+.card-body h3{font-size:19px}.card-body p{font-size:14px;color:var(--muted);margin-top:6px}
+.card-body small{font-size:12.5px;color:var(--rose);font-weight:700;margin-top:8px}
+.card-foot{margin-top:auto;padding-top:11px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:11px}
+.card-foot b{font-family:'Playfair Display',serif;font-size:19px}
+.card-foot button{background:var(--ink);color:#fff;border:0;padding:9px 14px;border-radius:100px;font-weight:600;font-size:13px}
+.builder{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px;align-items:start}
+@media(max-width:860px){.builder{grid-template-columns:1fr}}
+.builder-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.builder-card h3{font-size:18px;margin:16px 0 8px}.builder-card h3:first-child{margin-top:0}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{border:1px solid var(--line);background:#fff;padding:11px 16px;border-radius:100px;font-weight:600;font-size:14px;transition:.35s}
+.chip.active{background:var(--ink);color:#fff;transform:scale(1.03)}
+.chip2{border:1px solid var(--line);background:#fff;padding:9px 14px;border-radius:100px;font-size:13px;transition:.35s}
+.chip2.active{background:var(--rose);color:#fff;border-color:var(--rose)}
+.summary{background:var(--dark);color:#fff;border-radius:16px;overflow:hidden;position:sticky;top:90px}
+@media(max-width:860px){.summary{position:static}}
+.summary img{height:180px;object-fit:cover}
+.summary-body{padding:18px}.summary-list{margin-top:10px;border-top:1px solid rgba(255,255,255,.2);padding-top:10px}.summary-list div{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}
+.summary-total{display:flex;justify-content:space-between;align-items:center;background:#fff;color:#111;padding:12px 14px;border-radius:10px;margin-top:12px}.summary-total b{font-family:'Playfair Display',serif;font-size:22px}
+.summary-body button{width:100%;margin-top:12px;background:var(--rose);color:#fff;border:0;padding:14px;border-radius:100px;font-weight:700}
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+@media(max-width:760px){.reviews{grid-template-columns:1fr}}
+.review{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;transition:transform .5s}.review:hover{transform:translateY(-4px)}
+.review p{font-family:'Playfair Display',serif;font-size:18px;line-height:1.4;margin:10px 0}
+.order{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;align-items:start}
+@media(max-width:860px){.order{grid-template-columns:1fr}}
+.order-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.order-box img{height:150px;object-fit:cover;border-radius:10px;margin:12px 0}
+.order-box ul{list-style:none}.order-box li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:14px}
+.form label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:var(--muted);margin:12px 0 6px}.form label:first-child{margin-top:0}
+.form input{width:100%;padding:13px;border:1px solid var(--line);border-radius:8px;font-size:15px}
+.form input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.form button{width:100%;margin-top:14px;background:var(--ink);color:#fff;border:0;padding:14px;border-radius:100px;font-weight:700}
+footer{padding:26px 0 110px;border-top:1px solid var(--line)}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot p{font-size:13px;color:var(--muted)}
+.sticky{position:fixed;left:50%;transform:translateX(-50%) translateY(140%);bottom:12px;z-index:60;background:var(--ink);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 16px 32px rgba(0,0,0,.25);transition:transform .55s cubic-bezier(.22,1,.36,1);width:calc(100% - 32px);max-width:520px;padding:12px 12px 12px 16px}
+.sticky.show{transform:translateX(-50%) translateY(0)}
+.sticky-text{flex:1;min-width:0}.sticky-text b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sticky-text span{font-size:12px;opacity:.7}
+.sticky button{background:#fff;color:#111;border:0;padding:11px 16px;border-radius:8px;font-weight:700;white-space:nowrap}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:70;display:none;opacity:0;transition:opacity .4s}.overlay.open{display:block;opacity:1}
+.cart{position:fixed;top:0;right:0;bottom:0;width:430px;max-width:94vw;background:#fff;z-index:80;transform:translateX(100%);transition:transform .6s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column}
+.cart.open{transform:none}
+.cart-head{padding:18px;display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}.cart-head button{border:0;background:none;font-size:22px}
+.cart-items{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:11px}
+.cart-item{display:flex;gap:11px;border:1px solid var(--line);border-radius:10px;padding:11px;align-items:center;animation:heroText .5s both}
+.cart-item img{width:58px;height:58px;object-fit:cover;border-radius:8px}.cart-item b{font-size:14px;display:block}.cart-item small{font-size:12px;color:var(--muted)}
+.qty{display:flex;gap:8px;align-items:center;margin-left:auto}.qty button{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:50%;font-weight:800}
+.cart-foot{padding:16px;border-top:1px solid var(--line)}.cart-foot .row{display:flex;justify-content:space-between;font-size:14px;padding:4px 0}.cart-foot .total{font-weight:800;font-size:18px;border-top:1px solid var(--line);margin-top:8px;padding-top:10px}.cart-foot button{width:100%;margin-top:12px}.cart-foot .wa{background:var(--rose);color:#fff;border:0;padding:14px;border-radius:100px;font-weight:700}.cart-foot .clear{background:none;border:0;color:#888;font-size:12px;margin-top:8px;width:100%}
+</style></head><body>
+<header id="header"><div class="nav"><a class="logo" href="#">Nue Studio<span>Via Roma 12, Codroipo</span></a><div class="nav-links"><a href="#servizi">Servizi</a><a href="#crea">Crea la tua</a><a href="#prenota">Prenota</a></div><button class="cart-btn" onclick="openCart()">Prenotazione <b id="cartCount">0</b></button></div></header>
+<div class="hero">
+  <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1600&q=80" alt="Manicure"><div class="hero-overlay"></div></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&q=80" alt="Makeup / beauty"><div class="hero-overlay"></div></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=1600&q=80" alt="Salone"><div class="hero-overlay"></div></div>
+  <div class="hero-content"><div class="hero-content-inner"><h1 id="heroTitle">Manicure and<br><em>Pedicure</em> Nail Salon</h1><p>A Codroipo, dal 2019. Manicure, gel, ricostruzione. Prenoti online in 1 minuto, senza telefonare.</p><div class="hero-actions"><button class="btn btn-rose" onclick="document.getElementById('servizi').scrollIntoView({behavior:'smooth'})">Prenota ora →</button><a class="btn btn-white" href="#servizi">Vedi servizi</a></div></div></div>
+  <div class="hero-dots"><button class="hero-dot active" onclick="goSlide(0)"></button><button class="hero-dot" onclick="goSlide(1)"></button><button class="hero-dot" onclick="goSlide(2)"></button></div>
+</div>
+<main class="wrap">
+<section id="servizi" class="reveal"><h2>Services</h2><p class="lead">Scegli il trattamento. Prezzo chiaro, prima di prenotare.</p><div class="tabs" id="tabs"><div class="tabs-pill" id="pill"></div><button class="active" onclick="filterMenu('all',this)">Tutti</button><button onclick="filterMenu('mani',this)">Mani</button><button onclick="filterMenu('piedi',this)">Piedi</button><button onclick="filterMenu('extra',this)">Extra</button></div><div class="menu" id="menuGrid"></div></section>
+<section id="crea" class="reveal"><h2>Crea la tua manicure</h2><p class="lead">Tre domande. Il prezzo lo vedi subito.</p><div class="builder"><div class="builder-card"><h3>1. Cosa vuoi fare?</h3><div class="chip-row"><button class="chip active" onclick="setSize('Manicure',30,this)">Manicure — €30</button><button class="chip" onclick="setSize('Pedicure',35,this)">Pedicure — €35</button><button class="chip" onclick="setSize('Mani + Piedi',55,this)">Mani + Piedi — €55</button></div><h3>2. Gel o smalto normale?</h3><div class="chip-row"><button class="chip active" onclick="setBase('Smalto normale',this)">Smalto normale</button><button class="chip" onclick="setBase('Gel',this)">Gel + €10</button></div><h3>3. Extra?</h3><div class="chip-row" id="toppings"></div></div><div class="summary"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=900&q=80" alt="Nail polish"><div class="summary-body"><h3 id="previewTitle">Manicure • Smalto normale</h3><p id="previewDesc" style="font-size:13px;opacity:.8">Pronta in 60 minuti.</p><div class="summary-list" id="previewList"></div><div class="summary-total"><span>Paghi in salone</span><b id="previewTotal">€30</b></div><button onclick="addCustom()">Aggiungi alla prenotazione</button></div></div></div></section>
+<section class="reveal"><h2>What Our Clients Say</h2><div class="reviews"><div class="review"><div>★★★★★</div><p>“Ho prenotato alle 10, alle 11 ero già seduta. Le unghie perfette.”</p><small><b>Giulia</b> — Codroipo</small></div><div class="review"><div>★★★★★</div><p>“Vado ogni 3 settimane. Non cambio più salone.”</p><small><b>Marta</b> — Codroipo</small></div></div></section>
+<section id="prenota" class="reveal"><h2>Prenota</h2><div class="order"><div class="order-box"><h3>Nue Studio — Codroipo</h3><p style="color:var(--muted);font-size:14px">Salone di bellezza. Prenoti online, paghi in salone.</p><img src="https://images.unsplash.com/photo-1567721913486-6585f069b332?w=900&q=80" alt="Salone"><ul><li><span>Via</span><b>Via Roma 12, Codroipo</b></li><li><span>Orari</span><b>Mar — Sab, 9:00 — 19:00</b></li><li><span>Telefono</span><b>+39 333 000 0000</b></li></ul></div><div class="order-box form"><label>Il tuo nome</label><input id="ordNome" type="text" placeholder="Es. Giulia"><label>Telefono</label><input id="ordTel" type="tel" placeholder="+39 333 000 0000"><label>Quando?</label><div class="chip-row" id="oraChips"><button type="button" class="chip active" onclick="setOra(this,'Domani mattina')">Domani mattina</button><button type="button" class="chip" onclick="setOra(this,'Domani pomeriggio')">Domani pomeriggio</button><button type="button" class="chip" onclick="setOra(this,'Sabato')">Sabato</button></div><input type="hidden" id="ordOra" value="Domani mattina"><label>Note</label><input id="ordNote" type="text" placeholder="Es. Voglio il rosso"><button onclick="quickOrder()">Richiedi prenotazione</button><p id="ordMsg" style="color:#2F6B3A;font-weight:600;margin-top:10px;display:none"></p></div></div></section>
+</main>
+<footer class="wrap"><div class="foot"><div><p><b>Nue Studio</b><br>Via Roma 12, Codroipo<br>Mar — Sab • 9:00 — 19:00</p></div><div><p><b>Prenotazioni</b><br>WhatsApp: +39 333 000 0000<br>Instagram: @nuestudio.codroipo</p></div><div><p>© 2026 Nue Studio</p></div></div></footer>
+<div class="sticky" id="stickyBar"><div class="sticky-text"><b id="stickyText">0 servizi • €0</b><span>Prenota online • Paghi in salone</span></div><button onclick="openCart()">Vedi prenotazione</button></div>
+<div class="overlay" id="overlay" onclick="closeCart()"></div><div class="cart" id="cart"><div class="cart-head"><h3>La tua prenotazione</h3><button onclick="closeCart()">✕</button></div><div class="cart-items" id="cartItems"></div><div class="cart-foot"><div class="row"><span>Subtotale</span><b id="cartSub">€0</b></div><div class="row total"><span>Totale</span><b id="cartTotal">€0</b></div><button class="wa" onclick="sendWhatsApp()">Invia su WhatsApp</button><button class="clear" onclick="clearCart()">Svuota</button></div></div>
+<script>
+let slideIdx=0;const slides=document.querySelectorAll('.hero-slide');const dots=document.querySelectorAll('.hero-dot');const titles=["Manicure and<br><em>Pedicure</em> Nail Salon","Gel che dura<br><em>3 settimane.</em>","Pedicure completa.<br><em>Prenoti in 1 minuto.</em>"];
+function goSlide(n){slideIdx=n;slides.forEach((s,i)=>s.classList.toggle('active',i===n));dots.forEach((d,i)=>d.classList.toggle('active',i===n));document.getElementById('heroTitle').innerHTML=titles[n];}
+setInterval(()=>{goSlide((slideIdx+1)%slides.length)},5000);
+const MENU=[
+{n:'Manicure classica',d:'Taglio, limatura, cuticole, smalto.',tag:'60 min',p:30,c:'mani',img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80'},
+{n:'Gel manicure',d:'Manicure + gel, dura 3 settimane.',tag:'90 min',p:45,c:'mani',img:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80'},
+{n:'Pedicure gel',d:'Pedicure completa + gel.',tag:'60 min',p:40,c:'piedi',img:'https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&q=80'},
+{n:'Ricostruzione',d:'Allungamento + forma a scelta.',tag:'120 min',p:65,c:'extra',img:'https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=600&q=80'},
+{n:'Nail art',d:'Disegni, glitter, french.',tag:'+ 30 min',p:15,c:'extra',img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80'},
+{n:'Rimozione gel',d:'Rimozione delicata + cura.',tag:'30 min',p:20,c:'extra',img:'https://images.unsplash.com/photo-1567721913486-6585f069b332?w=600&q=80'}
+];
+const TOPPINGS=[{n:'Nail art',p:10},{n:'French',p:8},{n:'Glitter',p:5},{n:'Rimozione gel',p:15}];
+let curSize='Manicure',curSizePrice=30,curBase='Smalto normale',selected=new Set();let cart=[];let curOra='Domani mattina';let currentFilter='all';
+function movePill(btn){const pill=document.getElementById('pill');pill.style.left=btn.offsetLeft+'px';pill.style.width=btn.offsetWidth+'px';}
+function renderMenu(){let list=MENU.filter(m=>currentFilter==='all'?true:m.c===currentFilter);document.getElementById('menuGrid').innerHTML=list.map(m=>`<div class="card"><img src="${m.img}" alt="${m.n}"><div class="card-body"><h3>${m.n}</h3><p>${m.d}</p><small>${m.tag}</small><div class="card-foot"><b>€${m.p}</b><button onclick="addItem('${m.n}',${m.p},'${m.img}')">Prenota</button></div></div></div>`).join('');}
+function filterMenu(f,elm){currentFilter=f;document.querySelectorAll('.tabs button').forEach(e=>e.classList.remove('active'));if(elm){elm.classList.add('active');movePill(elm);}renderMenu();}
+renderMenu();setTimeout(()=>{const b=document.querySelector('.tabs button.active');if(b)movePill(b)},100);window.addEventListener('resize',()=>{const b=document.querySelector('.tabs button.active');if(b)movePill(b)});
+function renderToppings(){document.getElementById('toppings').innerHTML=TOPPINGS.map(t=>`<button class="chip2 ${selected.has(t.n)?'active':''}" onclick="toggleTop('${t.n}')">${t.n} + €${t.p}</button>`).join('');}
+function toggleTop(n){if(selected.has(n))selected.delete(n);else selected.add(n);renderToppings();updatePreview();}
+function setSize(s,p,elm){curSize=s;curSizePrice=p;document.querySelectorAll('.builder-card .chip-row .chip').forEach(e=>{if(e.textContent.includes('Manicure')||e.textContent.includes('Pedicure')||e.textContent.includes('Mani'))e.classList.remove('active')});elm.classList.add('active');updatePreview();}
+function setBase(b,elm){curBase=b;document.querySelectorAll('.builder-card .chip-row .chip').forEach(e=>{if(e.textContent.includes('Smalto')||e.textContent.includes('Gel'))e.classList.remove('active')});elm.classList.add('active');updatePreview();}
+function calcCustom(){let total=curSizePrice;if(curBase==='Gel')total+=10;let lines=[{n:`${curSize} • ${curBase}`,p:curSizePrice+(curBase==='Gel'?10:0)}];TOPPINGS.forEach(t=>{if(selected.has(t.n)){total+=t.p;lines.push({n:t.n,p:t.p})}});return{total,lines};}
+function updatePreview(){const{total,lines}=calcCustom();document.getElementById('previewTitle').textContent=`${curSize} • ${curBase}`;document.getElementById('previewDesc').textContent=`${Array.from(selected).join(', ')||'Senza extra'}.`;document.getElementById('previewList').innerHTML=lines.map(l=>`<div><span>${l.n}</span><b>€${l.p}</b></div>`).join('');document.getElementById('previewTotal').textContent='€'+total;}
+function addCustom(){const{total}=calcCustom();addItem(`${curSize} • ${curBase} + ${Array.from(selected).join(', ')}`,total,'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80');}
+renderToppings();updatePreview();
+function addItem(name,price,img){const f=cart.find(i=>i.name===name);if(f)f.qty++;else cart.push({name,price,img,qty:1});renderCart();}
+function renderCart(){const wrap=document.getElementById('cartItems');const count=cart.reduce((a,i)=>a+i.qty,0);document.getElementById('cartCount').textContent=count;if(!cart.length){wrap.innerHTML=`<div style="text-align:center;color:#7A6A66;padding:30px">Nessun servizio.<br>Aggiungi dal menù.</div>`}else{wrap.innerHTML=cart.map((it,idx)=>`<div class="cart-item"><img src="${it.img}"><div style="flex:1"><b>${it.name}</b><small>€${it.price}</small></div><div class="qty"><button onclick="changeQty(${idx},-1)">−</button><b>${it.qty}</b><button onclick="changeQty(${idx},1)">+</button></div><b>€${it.price*it.qty}</b></div>`).join('');}const sub=cart.reduce((a,i)=>a+i.price*i.qty,0);document.getElementById('cartSub').textContent='€'+sub;document.getElementById('cartTotal').textContent='€'+sub;document.getElementById('stickyText').textContent=`${count} servizi • €${sub}`;document.getElementById('stickyBar').classList.toggle('show',count>0);}
+function changeQty(idx,d){cart[idx].qty+=d;if(cart[idx].qty<=0)cart.splice(idx,1);renderCart();}
+function clearCart(){cart=[];renderCart();}
+function openCart(){document.getElementById('cart').classList.add('open');document.getElementById('overlay').classList.add('open')}
+function closeCart(){document.getElementById('cart').classList.remove('open');document.getElementById('overlay').classList.remove('open')}
+function setOra(elm,val){curOra=val;document.querySelectorAll('#oraChips .chip').forEach(c=>c.classList.remove('active'));elm.classList.add('active');document.getElementById('ordOra').value=val;}
+function quickOrder(){const n=document.getElementById('ordNome').value||'Cliente';document.getElementById('ordMsg').style.display='block';document.getElementById('ordMsg').textContent=`Grazie ${n}. Richiesta per ${curOra}. Ti confermiamo su WhatsApp.`;}
+function sendWhatsApp(){if(!cart.length){alert('Aggiungi un servizio prima!');return}let txt='Ciao Nue Studio! Vorrei prenotare:\n';cart.forEach(i=>{txt+=`• ${i.qty}x ${i.name} — €${i.price*i.qty}\n`});const total=cart.reduce((a,i)=>a+i.price*i.qty,0);txt+=`Totale: €${total}\nQuando: ${curOra}\nNome: ${document.getElementById('ordNome').value||''}`;window.open('https://wa.me/393330000000?text='+encodeURIComponent(txt),'_blank');}
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>20);});
+renderCart();
+</script></body></html>
